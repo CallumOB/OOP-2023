@@ -30,5 +30,9 @@ public class HelloProcessing extends PApplet
 		stroke(127);
 		fill(0, 0, 237);
 		triangle(40, 90, 300, 20, 80, 70);
+
+		fill(random(0, 255), random(0, 255), random(0, 255));
+		circle(random(0, width), random(0, width), random(0, width));
+		circle(mouseX, mouseY, mouseY);
 	}
 }
