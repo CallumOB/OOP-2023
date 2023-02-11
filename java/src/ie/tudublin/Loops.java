@@ -4,7 +4,7 @@ import processing.core.PApplet;
 
 public class Loops extends PApplet {
 
-    int mode = 0;
+    int mode = -1;
     int wCentre;
     int hCentre;
     
@@ -61,6 +61,21 @@ public class Loops extends PApplet {
 
             case(7): {
                 grid();
+                break;
+            }
+
+            case(8): {
+                blueSquares();
+                break;
+            }
+
+            case(9): {
+                star();
+                break;
+            }
+
+            default: {
+                shapes();
                 break;
             }
         }
@@ -211,6 +226,64 @@ public class Loops extends PApplet {
                 lineX += translate;
                 lineY += translate;
             }
+        }
+    }
+
+    public void blueSquares() {
+        int X1 = 0;
+        int Y1 = 0;
+        int X2 = X1 + 50;
+        int Y2 = Y1 + 50;
+        int colour_switch = 1;
+
+        for (int i = 0; i < width / 50; i++) {
+            X1 = 0;
+            colour_switch++;
+            for (int j = 0; j < width / 50; j++) {
+                if (colour_switch % 2 == 1) {
+                    fill(140, 255, 255);
+                } else {
+                    fill(140, 100, 255);
+                }
+
+                rect(X1, Y1, X2, Y2);
+                X1 += 50;
+                colour_switch++;
+            }
+            Y1 += 50;
+        }
+    }
+
+    public void star() {
+        float angle = TWO_PI / 5;
+        float length = 150;
+        float rotation = HALF_PI + angle / 2;
+        int x = wCentre;
+        int y = hCentre;
+
+        background(255);
+        stroke(0);
+
+        for (float a = 0; a < TWO_PI; a += angle) {
+            float endX = x + cos(a + rotation) * length;
+            float endY = y + sin(a + rotation) * length;
+            line(x, y, endX, endY);
+        }
+    }
+
+    public void shapes() {
+        float angle = TWO_PI / 5;
+        float radius = 150;
+        int x = wCentre;
+        int y = hCentre;
+        stroke(255);
+
+        for (float a = 0; a < TWO_PI; a += angle) {
+            float startX = x + cos(a + angle / 2 + PI / 2) * radius;
+            float startY = y + sin(a + angle / 2 + PI / 2) * radius;
+            float endX = x + cos(a + angle + angle / 2 + PI / 2) * radius;
+            float endY = y + sin(a + angle + angle / 2 + PI / 2) * radius;
+            line(startX, startY, endX, endY);
         }
     }
 
