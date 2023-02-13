@@ -36,14 +36,15 @@ public class StarMap extends PApplet {
 		String a;
 
 		stroke(150, 0, 128);
+		strokeWeight(2);
 		textSize(20);
 		textAlign(CENTER);
 
-		for (int i = 0; i < 11; i++) {
+		for (int i = 1; i <= 11; i++) {
 			a = Integer.toString(textValue);
+			Y1 = border * i;
 			text(a, textX, textY);
-			line(X1 + border, Y1 + border, X2, Y1 + border);
-			Y1 += border;
+			line(X1 + border, Y1, X2, Y1);
 			textValue++;
 			textX += border + 1;
 		}
@@ -51,11 +52,11 @@ public class StarMap extends PApplet {
 		Y1 = 0;
 		textValue = -5;
 
-		for (int i = 0; i < 11; i++) {
+		for (int i = 1; i <= 11; i++) {
 			a = Integer.toString(textValue);
+			X1 = border * i;
 			text(a, textX2, textY2);
-			line(X1 + border, Y1 + border, X1 + border, Y2);
-			X1 += border;
+			line(X1, Y1 + border, X1, Y2);
 			textValue++;
 			textY2 += border + 1;
 		}
