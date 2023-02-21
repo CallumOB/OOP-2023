@@ -86,10 +86,12 @@ public class Star {
     // Calculates where each star should be displayed on the grid.
     public void render(StarMap pa)
     {
+        // The map function remaps a number from one range to another.
+        // This ensures the star stays within the bounds of the grid.
         float x = PApplet.map(xG, -5, 5, pa.border, pa.width - pa.border);
         float y = PApplet.map(yG, -5, 5, pa.border, pa.height - pa.border);
 
-        
+        // Calls functions within the StarMap class to draw the star.
         pa.stroke(255, 255, 0);
         pa.line(x, y -5, x, y + 5);
         pa.line(x-5, y, x + 5, y);
