@@ -75,7 +75,19 @@ public class Audio1 extends PApplet {
         float cy = height / 2;
 
         switch (mode) {
-            case 0:
+            case 0: {
+                background(0);
+                for (int i = 0; i < ab.size(); i++) {
+                    // float c = map(ab.get(i), -1, 1, 0, 255);
+                    float c = map(i, 0, ab.size(), 0, 255);
+                    stroke(c, 255, 255);
+                    float f = ab.get(i) * halfH;
+                    line(i, halfH + f, halfH - f, i);
+                }
+                break;
+            }
+
+            case 1: {
                 background(0);
                 for (int i = 0; i < ab.size(); i++) {
                     // float c = map(ab.get(i), -1, 1, 0, 255);
@@ -85,23 +97,48 @@ public class Audio1 extends PApplet {
                     line(i, halfH + f, i, halfH - f);
                 }
                 break;
-            case 1:
+            } // end case 1
+
+            case 2: {
                 background(0);
                 for (int i = 0; i < ab.size(); i++) {
                     float c = map(i, 0, ab.size(), 0, 255);
                     stroke(c, 255, 255);
-                    float f = ab.get(i) * halfH;
+                    float f = ab.get(i) * height;
                     line(i, height + f, i, height - f);
                     line(i, f, i, -f);
                     line(width + f, i, width - f, i);
                     line(f, i, -f, i);
                 }
                 break;
+            } // end case 2
 
-        }
+            case 3: {
+                background(0);
+                for (int i = 0; i < ab.size(); i++) {
+                    float f = ab.get(i) * halfH;
+                    stroke(f, 255, 255);
+                    fill(0);
+                    circle(cx, cy, smoothedAmplitude * height);
+                }
+                break;
+            } // end case 3
+
+            case 4: {
+                background(0);
+                for (int i = 0; i < ab.size(); i++) {
+                    float f = ab.get(i) * halfH;
+                    stroke(f, 255, 255);
+                    fill(0);
+                    rectMode(CENTER);
+                    rect(cx, cy, smoothedAmplitude * height, smoothedAmplitude * height);
+                }
+                break;
+            } // end case 4
+        } // end switch
 
         // Other examples we made in the class
-        /*
+        /* 
          * stroke(255);
          * fill(100, 255, 255);
          * 
