@@ -17,6 +17,8 @@ public class Audio1 extends PApplet {
     float y = 0;
     float smoothedY = 0;
     float smoothedAmplitude = 0;
+    float lerpedAverage = 0;
+    float[] lerpBuffer;
 
     public void keyPressed() {
         if (key >= '0' && key <= '9') {
@@ -52,6 +54,7 @@ public class Audio1 extends PApplet {
         y = height / 2;
         smoothedY = y;
 
+        lerpBuffer = new float[ab.size()];
     }
 
     float off = 0;
@@ -135,6 +138,21 @@ public class Audio1 extends PApplet {
                 }
                 break;
             } // end case 4
+
+            case 5: {
+                float halfW = width / 2;
+                background(0);
+                for (int i = 0; i < ab.size(); i++) {
+                    float f = ab.get(i) * halfH;
+                    lerpBuffer[i] = lerp(lerpBuffer[i], ab.get(i), 0.1f);
+                    f = lerpBuffer[i] * width;
+                    stroke(f, 255, 255);
+                    line(i, halfH + f, i, halfH - f);
+                    line(halfW + f, i, halfW - f, i);
+                    line(i, f + i / halfW, i, f - i / halfW);
+                }
+                break;
+            }
         } // end switch
 
         // Other examples we made in the class
