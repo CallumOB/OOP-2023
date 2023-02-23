@@ -17,8 +17,6 @@ public class Audio1 extends PApplet {
     float y = 0;
     float smoothedY = 0;
     float smoothedAmplitude = 0;
-    float lerpedAverage = 0;
-    float[] lerpBuffer;
 
     public void keyPressed() {
         if (key >= '0' && key <= '9') {
@@ -53,8 +51,6 @@ public class Audio1 extends PApplet {
 
         y = height / 2;
         smoothedY = y;
-
-        lerpBuffer = new float[ab.size()];
     }
 
     float off = 0;
@@ -144,29 +140,17 @@ public class Audio1 extends PApplet {
                 background(0);
                 for (int i = 0; i < ab.size(); i++) {
                     float f = ab.get(i) * halfH;
-                    lerpBuffer[i] = lerp(lerpBuffer[i], ab.get(i), 0.1f);
-                    f = lerpBuffer[i] * width;
                     stroke(f, 255, 255);
-                    line(i, halfH + f, i, halfH - f);
-                    line(halfW + f, i, halfW - f, i);
-                    line(i, f + i / halfW, i, f - i / halfW);
+                    fill(0);
+                    line(cx + halfW, halfH + f, cx - halfW, halfH - f);
+                    line(f + halfW, halfH + cx, halfW - f, halfH - cx);
+                    circle(cx / 2, cy / 2, smoothedAmplitude * height * 2);
+                    circle((cx / 2) + halfW, cy / 2, smoothedAmplitude * height * 2);
+                    circle(cx / 2, (cy / 2) + halfH, smoothedAmplitude * height * 2);
+                    circle((cx / 2) + halfW, (cy / 2) + halfH, smoothedAmplitude * height * 2);
                 }
                 break;
-            }
+            } // end case 5
         } // end switch
-
-        // Other examples we made in the class
-        /* 
-         * stroke(255);
-         * fill(100, 255, 255);
-         * 
-         * circle(width / 2, halfH, lerpedA * 100);
-         * 
-         * circle(100, y, 50);
-         * y += random(-10, 10);
-         * smoothedY = lerp(smoothedY, y, 0.1f);
-         * circle(200, smoothedY, 50);
-         */
-
-    }
-}
+    } // end draw()
+} // end Audio1
