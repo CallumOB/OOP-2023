@@ -15,8 +15,9 @@ public class Audio2 extends PApplet {
     public void settings() {
         size(1024, 800);
     }
-
+    
     public void setup() {
+        colorMode(HSB);
         m = new Minim(this);
         ai = m.getLineIn(Minim.MONO, width, 44100, 16);
         ab = ai.mix;
