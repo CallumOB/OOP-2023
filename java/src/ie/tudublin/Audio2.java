@@ -34,10 +34,7 @@ public class Audio2 extends PApplet {
             lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
             float f = abs(lerpedBuffer[i] * half);
             line(i, half + f, i, half - f);
-        }
-
-        println(map(5, 0, 10, 1000, 2000));
-        println(map1(5, 0, 10, 1000, 2000));
+        } // end for 
     }
 
     float map1(float a, float b, float c, float d, float e) {
