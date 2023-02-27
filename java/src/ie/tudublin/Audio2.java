@@ -50,6 +50,12 @@ public class Audio2 extends PApplet {
         float freq = fft.indexToFreq(highest);
         fill(255);
         text("Freq: " + freq, 10, 50);
+
+        float y = map(freq, 1000, 2500, height, 0);
+        float lerpedY = 0;
+        lerpedY = lerp(lerpedY, y, 0.1f);
+        circle(200, y, 50);
+        circle(300, lerpedY, 50);
     }
 
     float map1(float a, float b, float c, float d, float e) {
