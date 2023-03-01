@@ -17,7 +17,7 @@ public class Audio2 extends PApplet {
     PitchSpeller ps = new PitchSpeller();
 
     public void settings() {
-        size(1024, 1024);
+        size(1024, 800);
     }
 
     public void setup() {
@@ -59,6 +59,7 @@ public class Audio2 extends PApplet {
         fill(255);
         textSize(20);
         text("Freq: " + freq, 100, 100);
+        text("Note: " + ps.spell(freq), 100, 125);
 
         float y = map(freq, 1000.0f, 2500.0f, height, 0);
         lerpedY = lerp(lerpedY, y, 0.1f);
