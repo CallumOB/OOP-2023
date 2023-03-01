@@ -1,29 +1,26 @@
 package ie.tudublin;
 
 import ddf.minim.AudioBuffer;
-// import ddf.minim.AudioBuffer;
 import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import ddf.minim.analysis.FFT;
 import processing.core.PApplet;
 
-public class Audio2 extends PApplet{
+public class Audio2 extends PApplet {
 
     Minim m;
     AudioInput ai;
     AudioPlayer ap;
     AudioBuffer ab;
-
     FFT fft;
+    PitchSpeller ps = new PitchSpeller();
 
-    public void settings()
-    {
+    public void settings() {
         size(1024, 1024);
     }
 
-    public void setup()
-    {
+    public void setup() {
         m = new Minim(this);
         ai = m.getLineIn(Minim.MONO, width, 44100, 16);
         ab = ai.mix;
@@ -33,14 +30,13 @@ public class Audio2 extends PApplet{
     }
 
     float[] lerpedBuffer;
-    public void draw()
-    {
+
+    public void draw() {
         background(0);
         colorMode(HSB);
         stroke(255);
         float half = height / 2;
-        for(int i = 0 ; i < ab.size() ; i ++)
-        {
+        for (int i = 0; i < ab.size(); i++) {
             stroke(map(i, 0, ab.size(), 0, 255), 255, 255);
             lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.05f);
             float f = abs(lerpedBuffer[i] * half * 2.0f);
@@ -51,12 +47,10 @@ public class Audio2 extends PApplet{
         stroke(255);
 
         int highestIndex = 0;
-        for(int i = 0 ;i < fft.specSize() / 2 ; i ++)
-        {
+        for (int i = 0; i < fft.specSize() / 2; i++) {
             line(i * 2.0f, height, i * 2.0f, height - fft.getBand(i) * 5.0f);
 
-            if (fft.getBand(i) > fft.getBand(highestIndex))
-            {
+            if (fft.getBand(i) > fft.getBand(highestIndex)) {
                 highestIndex = i;
             }
         }
@@ -70,18 +64,14 @@ public class Audio2 extends PApplet{
         lerpedY = lerp(lerpedY, y, 0.1f);
         circle(200, y, 50);
         circle(300, lerpedY, 50);
-        
 
+        System.out.println(ps.spell(440));
 
-
-        //println(map(5, 2, 10, 1000, 2000));
-        //println(map1(5, 2, 10, 1000, 2000));
     }
 
     float lerpedY = 0;
-    
-    float map1(float a, float b, float c, float d, float e)
-    {
+
+    float map1(float a, float b, float c, float d, float e) {
         float range1 = c - b;
         float range2 = e - d;
         float howFar = a - b;
