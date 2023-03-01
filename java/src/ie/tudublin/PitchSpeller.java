@@ -7,14 +7,17 @@ public class PitchSpeller {
             "g", "a", "b", "c'", "d'", "e'", "f'", "g'", "a'", "b'", "c''", "d''" };
 
     public String spell(float frequency) {
-        float closest = frequencies[frequencies.length - 1] - frequencies[0];
+        float closest = Float.MAX_VALUE;
         int index = 0;
 
-        for (int i = frequencies.length - 1; i > 0; i--) {
-            if (frequencies[i] >= frequency && frequencies[i] - frequency < closest) {
+        for (int i = 0; i < frequencies.length - 1; i++) {
+            if (frequency > frequencies[i] && frequency - frequencies[i] < closest) {
+                closest = frequency - frequencies[i];
+                index = i;
+            } else if (frequency < frequencies[i] && frequencies[i] - frequency< closest) {
                 closest = frequencies[i] - frequency;
                 index = i;
-            } // end if 
+            }
         } // end for 
 
         return spellings[index];

@@ -65,8 +65,6 @@ public class Audio2 extends PApplet {
         circle(200, y, 50);
         circle(300, lerpedY, 50);
 
-        System.out.println(ps.spell(440));
-
     }
 
     float lerpedY = 0;
