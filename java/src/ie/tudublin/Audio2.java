@@ -35,12 +35,15 @@ public class Audio2 extends PApplet {
         background(0);
         colorMode(HSB);
         stroke(255);
-        float half = height / 2;
+        float halfH = height / 2;
+        float halfW = width / 2;
         for (int i = 0; i < ab.size(); i++) {
             stroke(map(i, 0, ab.size(), 0, 255), 255, 255);
             lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.05f);
-            float f = abs(lerpedBuffer[i] * half * 2.0f);
-            line(i, half + f, i, half - f);
+            float f = abs(lerpedBuffer[i] * halfH * 2.0f);
+            fill(f, 255, 255);
+            circle(halfW / 2, halfH, f * 2);
+            circle (halfW + (halfW / 2), halfH, f * 2);
         }
 
         fft.forward(ab);
@@ -58,13 +61,8 @@ public class Audio2 extends PApplet {
         float freq = fft.indexToFreq(highestIndex);
         fill(255);
         textSize(20);
-        text("Freq: " + freq, 100, 100);
-        text("Note: " + ps.spell(freq), 100, 125);
-
-        float y = map(freq, 1000.0f, 2500.0f, height, 0);
-        lerpedY = lerp(lerpedY, y, 0.1f);
-        circle(200, y, 50);
-        circle(300, lerpedY, 50);
+        text("Freq: " + abs(freq), 100, 100);
+        text("Note: " + ps.spell(abs(freq)), 100, 125);
 
     }
 

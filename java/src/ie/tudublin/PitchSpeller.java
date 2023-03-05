@@ -14,7 +14,7 @@ public class PitchSpeller {
             if (frequency > frequencies[i] && frequency - frequencies[i] < closest) {
                 closest = frequency - frequencies[i];
                 index = i;
-            } else if (frequency < frequencies[i] && frequencies[i] - frequency< closest) {
+            } else if (frequency < frequencies[i] && frequencies[i] - frequency < closest) {
                 closest = frequencies[i] - frequency;
                 index = i;
             }
