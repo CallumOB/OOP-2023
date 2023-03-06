@@ -30,8 +30,8 @@ public class LifeBoard {
 
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
-                if (i != 0 && j != 0) {
-                    if (getCell(row + i, row + j)) {
+                if (i != 0 || j != 0) {
+                    if (getCell(i, j)) {
                         count++;
                     }
                 }
@@ -49,21 +49,22 @@ public class LifeBoard {
                 // 2-3 survives
                 // dead with 3 neighbours: comes to life
                 if (board[row][col] == true) {
-                    if (count < 2 || count > 3) {
+                    if (count == 2 || count == 3) {
+                        next[row][col] = true;
+                    } else {
+                        next[row][col] = false;
+                    }
+                } else {
+                    if (count == 3) {
                         next[row][col] = true;
                     } else {
                         next[row][col] = false;
                     }
                     
-                    if (count == 3) {
-                        next[row][col] = true;
-                    }
                 }
-                board = next;
-                next = new boolean[size][size];
             }
         }
-
+        
         boolean[][] temp = board;
         board = next;
         next = temp;
@@ -80,13 +81,11 @@ public class LifeBoard {
     }
 
     public void render() {
-        applyRules();
-
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 float x = col * cellWidth;
                 float y = row * cellWidth;
-
+                
                 if (board[row][col]) {
                     p.fill(p.random(0, 255), 255, 255);
                 } else {
@@ -95,6 +94,8 @@ public class LifeBoard {
                 p.rect(x, y, cellWidth, cellWidth);
             }
         }
+
+        applyRules();
     }
     
     public int getSize() {
