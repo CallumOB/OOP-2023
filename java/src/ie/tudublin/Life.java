@@ -6,7 +6,7 @@ public class Life extends PApplet {
 	LifeBoard board;
 
 	public void settings() {
-		size(500, 500);
+		size(800, 800);
 	}
 
 	public void setup() {
@@ -21,5 +21,23 @@ public class Life extends PApplet {
 		background(0);
 		board.render();
 
+	}
+
+	public void keyPressed() { 
+		if (keyCode == ' ') {
+			board.pause();
+		}
+
+		if (keyCode == '1') {
+			board.randomise();
+		}
+
+		if (keyCode == '2')  {
+			board.clear();
+		}
+
+		if (keyCode == '3') {
+			board.drawCross();
+		}
 	}
 }

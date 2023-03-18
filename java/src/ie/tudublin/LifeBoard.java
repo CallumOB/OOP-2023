@@ -102,4 +102,16 @@ public class LifeBoard {
     public int getSize() {
         return size;
     }
+
+    public void pause() {
+        
+    }
+
+    public void clear() {
+        // Once the pause is implemented, this function can pause all and set background 0
+    }
+
+    public void drawCross() {
+        // draws a across to see how it evolves
+    }
 }
