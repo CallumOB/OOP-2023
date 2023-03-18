@@ -8,6 +8,7 @@ public class LifeBoard {
     private int size;
     PApplet p;
     float cellWidth;
+    boolean running = true;
 
     public LifeBoard(int size, PApplet p) {
         this.size = size;
@@ -73,6 +74,10 @@ public class LifeBoard {
     }
 
     public void randomise() {
+        if (!running) {
+            pause();
+        }
+
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 float dice = p.random(0, 1);
@@ -82,6 +87,11 @@ public class LifeBoard {
     }
 
     public void render() {
+        if (!running) {
+            return;
+        }
+
+        p.background(0);
         applyRules();
 
         for (int row = 0; row < size; row++) {
@@ -104,14 +114,20 @@ public class LifeBoard {
     }
 
     public void pause() {
-        
+        running = !running;
     }
 
     public void clear() {
-        // Once the pause is implemented, this function can pause all and set background 0
+        pause();
+        p.background(0);
     }
 
     public void drawCross() {
-        // draws a across to see how it evolves
+        int mid = size / 2;
+        
+        for (int i = mid - 20; i <= mid + 20; i++) {
+            board[mid][i] = true;
+            board[i][mid] = true;
+        }
     }
 }
