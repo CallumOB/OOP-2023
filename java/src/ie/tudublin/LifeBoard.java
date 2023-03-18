@@ -74,6 +74,11 @@ public class LifeBoard {
     }
 
     public void randomise() {
+        /* This is here to recover from the clear() method. 
+         * When the clear() method is run, unless this if statement is here, the 
+         * randomise key will not work. After the board has been cleared, the user can press the 
+         * randomise key to unpause the game and randomise again.
+         */
         if (!running) {
             pause();
         }
@@ -87,10 +92,12 @@ public class LifeBoard {
     }
 
     public void render() {
+        // If the simulation is paused, the render() method won't run.
         if (!running) {
             return;
         }
 
+        // The background is set to zero within this method so that the simulation will just pause and not be cleared.
         p.background(0);
         applyRules();
 
@@ -128,6 +135,16 @@ public class LifeBoard {
         for (int i = mid - 20; i <= mid + 20; i++) {
             board[mid][i] = true;
             board[i][mid] = true;
+        }
+    }
+
+    public void setMouse() {
+        int col = (int)(p.mouseX / cellWidth);
+        int row = (int)(p.mouseY / cellWidth);
+
+        // If the mouse is within the bounds of the board, the corresponding element is set to be alive.
+        if (row >= 0 && row < size && col >= 0 && col < size) {
+            board[row][col] = true;
         }
     }
 }

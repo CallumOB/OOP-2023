@@ -19,7 +19,7 @@ public class Life extends PApplet {
 	
 	public void draw() {
 		board.render();
-
+		board.setMouse();
 	}
 
 	public void keyPressed() { 
