@@ -5,6 +5,7 @@ import processing.core.PVector;
 
 public class Ship {
     private PVector position;
+    private PVector forward;
     private float rotation;
     private int colour;
     private float size;
@@ -13,18 +14,45 @@ public class Ship {
 
     public Ship(float x, float y, float size, int colour, PApplet p) {
         position = new PVector(x, y);
+        forward = new PVector(0, -1);
         this.size = size;
         this.colour = colour;
         this.p = p;
         this.halfSize = size / 2;
     }
 
+    public void move() {
+        forward.x = PApplet.sin(rotation);
+        forward.y = -PApplet.cos(rotation);
+        
+        if (p.keyPressed) {
+            if (p.keyCode == PApplet.LEFT) {
+                rotation -= 0.1f;
+            }
+            if (p.keyCode == PApplet.RIGHT) {
+                rotation += 0.1f;
+            }
+            if (p.keyCode == PApplet.UP) {
+                position.x += forward.x;
+                position.y += forward.y;
+            }
+            if (p.keyCode == PApplet.DOWN) {
+                position.x -= forward.x;
+                position.y -= forward.y;
+            }
+        }
+    }
+
     public void render() {
+        p.pushMatrix();
+        p.translate(position.x, position.y);
+        p.rotate(rotation);
         p.stroke(colour, 255, 255);
-        p.line(position.x - halfSize, position.y + halfSize, position.x, position.y - halfSize);
-        p.line(position.x, position.y - halfSize, position.x + halfSize, position.y + halfSize);
-        p.line(position.x + halfSize, position.y + halfSize, position.x, position.y);
-        p.line(position.x, position.y, position.x - halfSize, position.y + halfSize);
+        p.line(0 - halfSize, 0 + halfSize, 0, 0 - halfSize);
+        p.line(0, 0 - halfSize, 0 + halfSize, 0 + halfSize);
+        p.line(0 + halfSize, 0 + halfSize, 0, 0);
+        p.line(0, 0, 0 - halfSize, 0 + halfSize);
+        p.popMatrix();
     }
 
     public PVector getPosition() {
