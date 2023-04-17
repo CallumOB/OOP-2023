@@ -93,9 +93,9 @@ public class YASC extends PApplet
 	public void draw()
 	{	background(0);
 
-		for(int i = bullets.size() - 1 ; i >= 0 ; i --)
+		for(int i = game.size() - 1 ; i >= 0 ; i --)
 		{
-			Bullet b = bullets.get(i);
+			GameObject b = game.get(i);
 			b.render();
 			b.move();
 		}

@@ -9,6 +9,8 @@ public class Ship extends GameObject{
     public Ship(float x, float y, float size, int c, PApplet p)
     {
         super(x, y, 0, c, p);
+        this.size = size;
+        halfSize = size / 2;
     }
 
     private float size;
