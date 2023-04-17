@@ -44,7 +44,7 @@ public class YASC extends PApplet
 
 	public void setup() {
 		Ship ship = new Ship(width / 2, height / 2, 50, 70, this);
-		Ship ship1 = new Ship(100, 50, 80, 6, this);
+		Ship ship1 = new Ship(100, 50, 70, 6, this);
 		colorMode(HSB);
 
 		game.add(ship);

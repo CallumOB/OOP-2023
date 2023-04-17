@@ -4,7 +4,6 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 public class Ship extends GameObject{
-    
 
     public Ship(float x, float y, float size, int c, PApplet p)
     {
@@ -20,6 +19,18 @@ public class Ship extends GameObject{
 
     int toPass = 1000 / fireRate;
     int ellapsed = 1000;
+    int health = 100;
+
+    public void checkCollisions() {
+        for (int i = ((YASC) p).game.size() - 1; i >= 0; i--) {
+            GameObject go = ((YASC) p).game.get(i);
+
+            if (PVector.dist(go.pos, pos) < halfSize && go instanceof Bullet) {
+                health--;
+                ((YASC) p).game.remove(go);
+            }
+        }
+    }
 
     public void move()
     {
@@ -72,8 +83,14 @@ public class Ship extends GameObject{
 
     public void render()
     {
+        checkCollisions();
         p.pushMatrix();
         p.translate(pos.x, pos.y);
+
+        p.fill(255);
+        p.text("Health :" + health, 50, 0);
+        p.noFill();
+
         p.rotate(rot);
         p.stroke(c, 255, 255);
         p.line(- halfSize, halfSize, 0, - halfSize);
