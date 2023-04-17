@@ -16,7 +16,7 @@ public class Bullet extends GameObject {
 
     }
 
-    void render() {
+    public void render() {
         p.pushMatrix();
         p.stroke(c, 255, 255);
         p.translate(pos.x, pos.y);
@@ -25,7 +25,7 @@ public class Bullet extends GameObject {
         p.popMatrix();
     }
 
-    void move() {
+    public void move() {
         forward.x = PApplet.sin(rot);
         forward.y = -PApplet.cos(rot);
 
@@ -52,7 +52,7 @@ public class Bullet extends GameObject {
 
         int now = p.millis();
         if (now - creationTime > timeToLive) {
-            ((YASC) p).bullets.remove(this);
+            ((YASC) p).game.remove(this);
         }
 
     }
