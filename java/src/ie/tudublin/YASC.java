@@ -47,6 +47,8 @@ public class YASC extends PApplet
 
 		gameObjects.add(ship);
 		gameObjects.add(ship1);
+
+		gameObjects.add(new HealthPowerUp(60, 100, 0, 255, this));
 		
 
 		colorMode(HSB);
@@ -97,7 +99,7 @@ public class YASC extends PApplet
 	{	
 		fill(0, 20);
 		noStroke();
-		rect(0, 0, width, height);		
+		rect(0, 0, keys.length, keys.length);		
 		
 		for(int i = gameObjects.size() - 1 ; i >= 0 ; i --)
 		{
